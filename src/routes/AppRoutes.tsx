@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { Routes, Route } from 'react-router-dom'
 import LoginPage from 'pages/auth/LoginPage';
+
 
 
 function AppRoutes() {
@@ -13,4 +15,24 @@ function AppRoutes() {
   );
 }
 
+
 export default AppRoutes;
+
+
+
+
+// function AppRoutes(){
+
+//   return(
+//     <>
+//       <Navbar />
+//       <Routes>
+//         <Route path='/' element={<Home />} />
+//         <Route path='/about' element={<About />} />
+//       </Routes>
+//     </>
+//   )
+// }
+
+
+// export default AppRoutes;
