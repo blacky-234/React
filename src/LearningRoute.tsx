@@ -12,12 +12,17 @@ import { UserDetails } from './components/Learning/Route/user/UserDeatails';
 import { Admin } from './components/Learning/Route/user/Admin';
 import { Profile } from './components/Learning/Route/user/Profile';
 import React from 'react';
+import { AuthProvider } from './components/Learning/Route/authentication/Auth';
+import { Login } from './components/Learning/Route/authentication/Login';
+import { RequireAuth } from './components/Learning/Route/authentication/RequireAuth';
 
 const LazyAbout = React.lazy(() => import('./components/Learning/Route/about/About'));
 
-function App(){
+
+
+function RouteApp(){
   return (
-    <>
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -37,14 +42,15 @@ function App(){
           <Route path=':userId' element={<UserDetails />} />
           <Route path='admin' element={<Admin />} />
         </Route>
-        <Route path='profile' element={<Profile />} />
+        <Route path='profile' element={<RequireAuth><Profile /></RequireAuth>} />
+        <Route path='login' element={<Login />} />
       </Routes>
-    </>
+    </AuthProvider>
   )
 }
 
 
-export default App;
+export default RouteApp;
 
 /**
  * <Route index element={<FeatureProducts />} /> url:localhost:3000/products

@@ -1,25 +1,30 @@
 import React from 'react';
 import 'assets/css/loginform/login.css';
 
-type LoginFormProps = {
-  email: string;
-  password: string;
-  checked: boolean;
-  onEmailChange: (val: string) => void;
-  onPasswordChange: (val: string) => void;
-  onCheckedChange: (val: boolean) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
 
-function LoginForm({
-  email,
-  password,
-  checked,
-  onEmailChange,
-  onPasswordChange,
-  onCheckedChange,
-  onSubmit,
-}: LoginFormProps){
+export function LoginForm(){
+
+  const[email, onEmailChange] = React.useState('');
+  const[password, onPasswordChange] = React.useState('');
+  const[checked, onCheckedChange] = React.useState(false);
+
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const api = new AxiosClient('json');
+    try {
+      const response = await api.post('/auth/login', {
+        email,
+        password,
+      });
+      console.log('Success:', response.data);
+      alert(response.data.message);
+    } catch (error: any) {
+      console.error('Login failed:', error.response?.data || error.message);
+      alert(error.response?.data?.message || 'Login failed');
+    }
+  };
+
   return (
     <div className="bg-orchid">
       <div className="d-flex justify-content-center align-items-center min-vh-100 w-100">
@@ -68,4 +73,4 @@ function LoginForm({
   );
 }
 
-export default LoginForm;
+// export default LoginForm;
